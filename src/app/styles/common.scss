@@ -1,0 +1,29 @@
+@import url(./reset.scss);
+@import url(./variables.scss);
+
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.columnGapXs {
+  column-gap: 15px;
+}
+.flexAlignCenter {
+  display: flex;
+  align-items: center;
+}
+
+.textNoWrap {
+  white-space: nowrap;
+}
+
+.mainLayout {
+  padding-top: 100px;
+}
+
+.flexAlignJustifyCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,32 @@
+.header {
+  &.dark {
+    a {
+      color: var(--light-color);
+    }
+  }
+
+  .toolbar {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    .containerMain {
+      width: 100%;
+    }
+  }
+}
+
+.logo {
+  width: 45px;
+  height: auto;
+  g {
+    fill: var(--light-color);
+  }
+  &.dark {
+    g {
+      fill: var(--dark-color);
+    }
+  }
+}
+
+a {
+  color: var(--dark-color);
+}
