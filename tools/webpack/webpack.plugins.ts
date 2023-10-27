@@ -27,10 +27,13 @@ export const buildPlugins = (
       __IS_DEV__: options.mode === 'development'
     }),
     ...(options.mode === 'development'
-      ? [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()]
-      : []),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false
-    })
+      ? [
+          new HotModuleReplacementPlugin(),
+          new ReactRefreshWebpackPlugin(),
+          new BundleAnalyzerPlugin({
+            openAnalyzer: false
+          })
+        ]
+      : [])
   ]
 }
