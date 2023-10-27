@@ -18,9 +18,9 @@ export const buildDevConfig = (options: IBuildOptions): Configuration => {
       chunkFilename: '[name].chunk.js'
     },
     plugins: buildPlugins(options),
-    resolve: buildResolvers(),
+    resolve: buildResolvers(options),
     stats: 'errors-warnings',
-    devServer: buildDevServer(options),
+    ...(options.port && { devServer: buildDevServer(options) }),
     devtool: 'inline-source-map'
   }
 }

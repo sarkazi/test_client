@@ -10,7 +10,9 @@ import useScrollTrigger from '@mui/material/useScrollTrigger'
 
 import { ThemeContext } from '../../../shared/lib/context/ThemeContext'
 import { ThemeSwitcher } from '../../../widgets/ThemeSwitcher'
-import { LanguageSwitcher } from '../../../widgets/LanguageSwitcher'
+
+// import { LanguageSwitcher } from '@/widgets/LanguageSwitcher'
+import { LanguageSwitcher } from '../../LanguageSwitcher'
 
 import Logo from '../../../shared/assets/images/logo.svg'
 

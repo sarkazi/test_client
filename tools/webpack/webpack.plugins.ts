@@ -29,6 +29,8 @@ export const buildPlugins = (
     ...(options.mode === 'development'
       ? [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()]
       : []),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    })
   ]
 }

@@ -23,7 +23,8 @@ export default (env: WebpackEnvProps): Configuration => {
     paths: {
       entry: resolve(__dirname, '../..', 'src', 'index.tsx'),
       html: resolve(__dirname, '../..', 'public', 'index.html'),
-      output: resolve(__dirname, '../..', 'dist')
+      output: resolve(__dirname, '../..', 'dist'),
+      src: resolve(__dirname, 'src')
     },
     mode
   }

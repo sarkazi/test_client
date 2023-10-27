@@ -4,6 +4,7 @@ export interface IBuildPaths {
   entry: string
   output: string
   html: string
+  src: string
 }
 
 export interface IBuildOptions {

@@ -17,7 +17,7 @@ export const buildProdConfig = (options: IBuildOptions): Configuration => {
       clean: true
     },
     plugins: buildPlugins(options),
-    resolve: buildResolvers(),
+    resolve: buildResolvers(options),
     stats: 'errors-warnings',
     optimization: {
       minimize: true,

@@ -8,22 +8,13 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "outDir": "dist",
     "strictNullChecks": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
-
-    // "noUnusedLocals": true
-    // "paths": {
-    //   "*": ["node_modules/*"],
-    //   "@assets/*": ["./assets/*"],
-    //   "@src/*": ["./src/*"]
-    // }
   },
-  // "include": [".eslintrc.ts", "src/**/*", "tools/**/*"],
-  // "include": ["src/**/*", "tools/**/*"],
+  // "include": ["src"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
