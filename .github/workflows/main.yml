@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
-      - run: npm run build:prod
-      - run: npm run lint:check
+      - name: npm install
+        run: npm i
+      - name: build prod
+        run: npm run build:prod
+      - name: lint checked
+        run: npm run lint:check
