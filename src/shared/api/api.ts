@@ -6,6 +6,8 @@ import {
 
 import Cookies from 'js-cookie'
 
+console.log(__API__)
+
 export const $api = axios.create({
   baseURL: __API__
 })
