@@ -10,14 +10,15 @@ interface WebpackEnvProps {
   mode: buildMode
   WEBPACK_BUILD?: boolean
   WEBPACK_SERVE?: boolean
-  apiUrl: string
+  API_URL: string
 }
 
-const getApiUrl = (mode: buildMode, apiUrl?: string) => {
-  if (apiUrl) {
-    return apiUrl
+const getApiUrl = (MODE: buildMode, API_URL?: string) => {
+  if (API_URL) {
+    console.log(API_URL)
+    return API_URL
   }
-  if (mode === 'production') {
+  if (MODE === 'production') {
     return '/api'
   }
 
@@ -30,7 +31,7 @@ export default (env: WebpackEnvProps): Configuration => {
       ? 'production'
       : 'development'
 
-  const apiUrl = getApiUrl(mode, env?.apiUrl)
+  const apiUrl = getApiUrl(mode, env?.API_URL)
 
   const options: IBuildOptions = {
     ...(env.port && { port: env.port }),
