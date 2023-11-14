@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Input, Button, notification } from 'antd'
+import { Input, Button, notification, Flex } from 'antd'
 import styles from './LoginForm.module.scss'
 import { FormEvent, memo, useCallback, useState } from 'react'
 
@@ -16,7 +16,10 @@ import { UserContext } from '../../../../shared/lib/context/AuthContextt'
 const LoginForm = memo(() => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [api, contextHolder] = notification.useNotification()
+
+  const [requestEndpoint, setRequestEndpoint] = useState<
+    'login' | 'register' | ''
+  >('')
 
   const { setUser } = useContext(UserContext)
 
@@ -25,6 +28,7 @@ const LoginForm = memo(() => {
   const onLogin = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+      setRequestEndpoint('login')
 
       try {
         const { data } = await $api.post('/auth/login', {
@@ -38,20 +42,50 @@ const LoginForm = memo(() => {
           navigate('/')
           setUser(data.apiData)
         } else {
-          api.warning({ message: data.message })
+          notification.warning({ message: data.message })
         }
       } catch (err) {
         console.log(err)
 
-        api.error({
+        notification.error({
           message: err?.response?.data?.message
             ? err?.response?.data?.message
             : 'Server-side error'
         })
+      } finally {
+        setRequestEndpoint('')
       }
     },
-    [password, email]
+    [password, email, requestEndpoint]
   )
+
+  const onReg = useCallback(async () => {
+    try {
+      setRequestEndpoint('register')
+      const { data } = await $api.post('/auth/register', {
+        email,
+        password
+      })
+
+      if (data.status === 'success') {
+        setEmail('')
+        setPassword('')
+        notification.success({ message: data.message })
+      } else {
+        notification.warning({ message: data.message })
+      }
+    } catch (err) {
+      console.log(err)
+
+      notification.error({
+        message: err?.response?.data?.message
+          ? err?.response?.data?.message
+          : 'Server-side error'
+      })
+    } finally {
+      setRequestEndpoint('')
+    }
+  }, [password, email, requestEndpoint])
 
   return (
     <form onSubmit={onLogin} className={styles.form}>
@@ -67,9 +101,23 @@ const LoginForm = memo(() => {
         name="password"
         placeholder="Enter password"
       />
-      <Button color="" className={styles.btn} htmlType="submit">
-        Login
-      </Button>
+      <Flex align="center" justify="flex-start" gap="10px">
+        <Button
+          loading={requestEndpoint === 'login'}
+          color=""
+          className={styles.btn}
+          htmlType="submit"
+        >
+          Войти
+        </Button>
+        <Button
+          loading={requestEndpoint === 'register'}
+          onClick={onReg}
+          type="text"
+        >
+          Регистрация
+        </Button>
+      </Flex>
     </form>
   )
 })

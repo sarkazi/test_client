@@ -1,6 +1,6 @@
 import { useCallback, useEffect, memo, useContext } from 'react'
-import { Button, Form, Input, Modal, Table } from 'antd'
-import { ColumnsType, TableProps } from 'antd/es/table'
+import { Button, Form, Input, Modal, Table, notification } from 'antd'
+import { ColumnsType } from 'antd/es/table'
 import styles from './FeedbackPage.module.scss'
 import { useState } from 'react'
 import { $api } from '../../../shared/api/api'
@@ -29,6 +29,10 @@ const FeedbackPage = () => {
         }
       } catch (err) {
         console.log(err)
+
+        notification.error({
+          message: 'Ошибка при получении списка отзывов...'
+        })
       } finally {
         setReviewsData((prev) => ({
           ...prev,
@@ -61,9 +65,18 @@ const FeedbackPage = () => {
       if (data.status === 'success') {
         setModalOpened(false)
         setToggleChange(!toggleChange)
+        notification.success({ message: data.message })
+      } else {
+        notification.warning({ message: data.message })
       }
     } catch (err) {
       console.log(err)
+
+      notification.error({
+        message: err?.response?.data?.message
+          ? err?.response?.data?.message
+          : 'Server-side error'
+      })
     }
   }, [activeRecord, toggleChange])
 
@@ -125,9 +138,17 @@ const FeedbackPage = () => {
       if (data.status === 'success') {
         setToggleChange(!toggleChange)
         setActiveRecord(() => data.apiData)
+      } else {
+        notification.warning({ message: data.message })
       }
     } catch (err) {
       console.log(err)
+
+      notification.error({
+        message: err?.response?.data?.message
+          ? err?.response?.data?.message
+          : 'Server-side error'
+      })
     }
     setActiveRecord((prev) => ({ ...prev, email: user!.email }))
   }
@@ -141,9 +162,18 @@ const FeedbackPage = () => {
       if (data.status === 'success') {
         setModalOpened(false)
         setToggleChange(!toggleChange)
+        notification.success({ message: data.message })
+      } else {
+        notification.warning({ message: data.message })
       }
     } catch (err) {
       console.log(err)
+
+      notification.error({
+        message: err?.response?.data?.message
+          ? err?.response?.data?.message
+          : 'Server-side error'
+      })
     }
   }, [toggleChange, activeRecord])
 
@@ -159,6 +189,11 @@ const FeedbackPage = () => {
         onOk={handleUpdate}
         onCancel={handleModalCancel}
         centered
+        okButtonProps={{
+          disabled:
+            !(activeRecord as ReviewInterface).email ||
+            !(activeRecord as ReviewInterface).text
+        }}
         okText={
           (activeRecord as ReviewInterface).status === 'Черновик'
             ? 'Создать'
