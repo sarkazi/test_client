@@ -107,6 +107,7 @@ const LoginForm = memo(() => {
           color=""
           className={styles.btn}
           htmlType="submit"
+          disabled={!email || !password}
         >
           Войти
         </Button>
@@ -114,6 +115,7 @@ const LoginForm = memo(() => {
           loading={requestEndpoint === 'register'}
           onClick={onReg}
           type="text"
+          disabled={!email || !password}
         >
           Регистрация
         </Button>
