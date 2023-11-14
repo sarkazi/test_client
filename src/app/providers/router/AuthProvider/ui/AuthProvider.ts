@@ -1,10 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { $api } from '../../../../../shared/api/api'
 
-import { AuthContext } from '../../../../../shared/lib/context/AuthContextt'
+import { UserContext } from '../../../../../shared/lib/context/AuthContextt'
 
-const AuthProvider = ({ children }) => {
+interface AuthProviderProps {
+  children: ReactNode
+}
+
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
@@ -29,7 +33,7 @@ const AuthProvider = ({ children }) => {
   )
 
   return (
-    <AuthContext.Provider value={defaultProps}>{children}</AuthContext.Provider>
+    <UserContext.Provider value={defaultProps}>{children}</UserContext.Provider>
   )
 }
 

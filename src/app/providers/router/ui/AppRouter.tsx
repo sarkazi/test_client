@@ -23,11 +23,16 @@ import { Route, Routes } from 'react-router-dom'
 import { RequireAuth } from './RequireAuth'
 import { routeConfig } from '../config/routeConfig'
 import { AppRoutesProps } from '../../../../shared/types/router'
+import { Skeleton } from 'antd'
+
+import styles from './AppRouter.module.scss'
 
 const AppRouter = () => {
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
     const element = (
-      <Suspense fallback={<div>...loading</div>}>{route.element}</Suspense>
+      <Suspense fallback={<Skeleton className={styles.skeleton} />}>
+        {route.element}
+      </Suspense>
     )
 
     return (

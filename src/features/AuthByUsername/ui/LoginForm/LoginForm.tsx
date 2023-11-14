@@ -25,6 +25,11 @@ const LoginForm = memo(() => {
 
   const navigate = useNavigate()
 
+  const resetForm = () => {
+    setPassword('')
+    setEmail('')
+  }
+
   const onLogin = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
@@ -41,6 +46,7 @@ const LoginForm = memo(() => {
           Cookie.set(USER_COOKIE_REFRESH_TOKEN_KEY, data.apiData.refreshToken)
           navigate('/')
           setUser(data.apiData)
+          resetForm()
         } else {
           notification.warning({ message: data.message })
         }
@@ -68,8 +74,7 @@ const LoginForm = memo(() => {
       })
 
       if (data.status === 'success') {
-        setEmail('')
-        setPassword('')
+        resetForm()
         notification.success({ message: data.message })
       } else {
         notification.warning({ message: data.message })

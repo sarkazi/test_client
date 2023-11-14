@@ -1,0 +1,14 @@
+.tableOverlay {
+  padding: 8px;
+  background: linear-gradient(35deg, #2ac9de, #ed5db8);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .btnPlus {
+    margin-bottom: 8px;
+    align-self: flex-end;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

@@ -15,7 +15,6 @@ interface WebpackEnvProps {
 
 const getApiUrl = (MODE: buildMode, API_URL?: string) => {
   if (API_URL) {
-    console.log(API_URL)
     return API_URL
   }
   if (MODE === 'production') {

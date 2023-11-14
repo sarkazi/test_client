@@ -1,11 +1,12 @@
 import { memo } from 'react'
 import LoginForm from '../../../features/AuthByUsername/ui/LoginForm/LoginForm'
+import { Page } from '../../../widgets/Page'
 
 const LoginPage = memo(() => {
   return (
-    <main>
+    <Page className="centered">
       <LoginForm />
-    </main>
+    </Page>
   )
 })
 

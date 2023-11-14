@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  max-width: 500px;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+  max-height: 400px;
+
+  .btn {
+    align-self: flex-start;
+    background: linear-gradient(35deg, #2ac9de, #ed5db8);
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}
