@@ -1,93 +1,54 @@
-import { useContext, type FC } from 'react'
-import { AppBar, Toolbar, Box, Slide, Typography, Button } from '@mui/material'
+import { memo, useContext } from 'react'
+
+import { Button, Flex, Layout } from 'antd'
 import { Link } from 'react-router-dom'
-import classes from './Navbar.module.scss'
 
-import { useTranslation } from 'react-i18next'
-import clsx from 'clsx'
+import Cookie from 'js-cookie'
 
-import useScrollTrigger from '@mui/material/useScrollTrigger'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-import { ThemeContext } from '../../../shared/lib/context/ThemeContext'
-import { ThemeSwitcher } from '../../../widgets/ThemeSwitcher'
+import styles from './Navbar.module.scss'
+import {
+  USER_COOKIE_ACCESS_TOKEN_KEY,
+  USER_COOKIE_REFRESH_TOKEN_KEY
+} from '../../../shared/const/cookieFile'
+import { UserContext } from '../../../shared/lib/context/AuthContextt'
 
-// import { LanguageSwitcher } from '@/widgets/LanguageSwitcher'
-import { LanguageSwitcher } from '../../LanguageSwitcher'
+const { Header } = Layout
 
-import Logo from '../../../shared/assets/images/logo.svg'
+export const Navbar = memo(() => {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
 
-interface INavbarProps {
-  window?: () => Window
-}
+  const { user, setUser } = useContext(UserContext)
 
-const Navbar: FC = (props: INavbarProps) => {
-  const { t } = useTranslation()
-
-  const { theme } = useContext(ThemeContext)
-
-  const { window } = props
-
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined
-  })
+  const onLogout = () => {
+    Cookie.remove(USER_COOKIE_ACCESS_TOKEN_KEY)
+    Cookie.remove(USER_COOKIE_REFRESH_TOKEN_KEY)
+    navigate('/login')
+    setUser(null)
+  }
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      <AppBar
-        color="secondary"
-        className={clsx(classes.header, theme === 'dark' && classes.dark)}
+    <Header className={styles.header}>
+      <Flex
+        justify="space-between"
+        align="center"
+        gap="10px"
+        className="widthFull"
       >
-        <Toolbar className={classes.toolbar}>
-          <Box
-            className={clsx(classes.containerMain, 'flexBetween columnGapXs')}
-          >
-            <Box className="flexAlignCenter columnGapXs textNoWrap">
-              <Link to="/" className="flexAlignJustifyCenter">
-                <Logo
-                  className={clsx(
-                    classes.logo,
-                    theme === 'light' && classes.dark
-                  )}
-                />
-              </Link>
+        <Flex align="center" gap="30px">
+          <Link className={styles.logo} to="/" />
+          {user && <Link to="review">Список отзывов</Link>}
+        </Flex>
 
-              <Box className="flexAlignCenter columnGapXs">
-                <Link to="/submit">
-                  <Button color="primary" variant="contained">
-                    <Typography variant="button">{t('submitVideo')}</Typography>
-                  </Button>
-                </Link>
-
-                <Link to="/">
-                  {<Typography variant="button">{t('home')}</Typography>}
-                </Link>
-                <Link to="/library">
-                  {
-                    <Typography variant="button">
-                      {t('videoLibrary')}
-                    </Typography>
-                  }
-                </Link>
-                <Link to="/about">
-                  {<Typography variant="button">{t('aboutUs')}</Typography>}
-                </Link>
-                <Link to="/contactUs">
-                  {<Typography variant="button">{t('contactUs')}</Typography>}
-                </Link>
-                <Link to="/login">
-                  {<Typography variant="button">{t('login')}</Typography>}
-                </Link>
-              </Box>
-            </Box>
-            <Box className="flexAlignCenter columnGapXs">
-              <ThemeSwitcher />
-              <LanguageSwitcher />
-            </Box>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Slide>
+        {!pathname.includes('login') &&
+          (!user ? (
+            <Button onClick={() => navigate('/login')}>Войти</Button>
+          ) : (
+            <Button onClick={onLogout}>Выйти</Button>
+          ))}
+      </Flex>
+    </Header>
   )
-}
-
-export default Navbar
+})

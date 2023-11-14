@@ -24,12 +24,14 @@ export const buildPlugins = (
     }),
     new ProgressPlugin(),
     new DefinePlugin({
-      __IS_DEV__: options.mode === 'development'
+      __IS_DEV__: options.mode === 'development',
+      __API__: JSON.stringify(options.apiUrl)
     }),
     ...(options.mode === 'development'
+      ? [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()]
+      : []),
+    ...(options.mode === 'development' && !options.port
       ? [
-          new HotModuleReplacementPlugin(),
-          new ReactRefreshWebpackPlugin(),
           new BundleAnalyzerPlugin({
             openAnalyzer: false
           })

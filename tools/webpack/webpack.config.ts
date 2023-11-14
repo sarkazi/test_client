@@ -10,6 +10,18 @@ interface WebpackEnvProps {
   mode: buildMode
   WEBPACK_BUILD?: boolean
   WEBPACK_SERVE?: boolean
+  apiUrl: string
+}
+
+const getApiUrl = (mode: buildMode, apiUrl?: string) => {
+  if (apiUrl) {
+    return apiUrl
+  }
+  if (mode === 'production') {
+    return '/api'
+  }
+
+  return 'http://localhost:6001'
 }
 
 export default (env: WebpackEnvProps): Configuration => {
@@ -17,6 +29,8 @@ export default (env: WebpackEnvProps): Configuration => {
     !!env.WEBPACK_BUILD && env.mode === 'production'
       ? 'production'
       : 'development'
+
+  const apiUrl = getApiUrl(mode, env?.apiUrl)
 
   const options: IBuildOptions = {
     ...(env.port && { port: env.port }),
@@ -26,7 +40,8 @@ export default (env: WebpackEnvProps): Configuration => {
       output: resolve(__dirname, '../..', 'dist'),
       src: resolve(__dirname, 'src')
     },
-    mode
+    mode,
+    apiUrl
   }
 
   return mode === 'development'

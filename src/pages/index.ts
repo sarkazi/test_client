@@ -1,6 +1,5 @@
 import { MainPageAsync as MainPage } from './MainPage/ui/MainPageAsync'
-import { AboutPageAsync as AboutPage } from './AboutPage/ui/AboutPageAsync'
-import { SubmitPageAsync as SubmitPage } from './SubmitPage/ui/SubmitPageAsync'
-import { NotFoundPageAsync as NotFoundPage } from './NotFoundPage/ui/NotFoundPageAsync'
+import { LoginPageAsync as LoginPage } from './LoginPage/ui/LoginPageAsync'
+import { FeedbackPageAsync as FeedbackPage } from './FeedbackPage/ui/FeedbackPageAsync'
 
-export { MainPage, AboutPage, SubmitPage, NotFoundPage }
+export { MainPage, LoginPage, FeedbackPage }

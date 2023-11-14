@@ -11,4 +11,5 @@ export interface IBuildOptions {
   paths: IBuildPaths
   port?: number
   mode: buildMode
+  apiUrl: string
 }

@@ -12,7 +12,9 @@
     "strictNullChecks": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es6", "dom"],
+    "noImplicitThis": true
   },
   // "include": ["src"],
   "ts-node": {

@@ -1,4 +1,38 @@
 :root {
-  --dark-color: #303030;
-  --light-color: #f0f0f0;
+  --dark-font-color: #303030;
+  --light-font-color: #f0f0f0;
+
+  --margin-bottom-xs: 5px;
+  --margin-bottom-sm: 10px;
+  --margin-bottom-md: 15px;
+  --margin-bottom-lg: 20px;
+  --margin-bottom-xl: 25px;
+  --margin-bottom-2xl: 30px;
+  --margin-bottom-3xl: 35px;
+
+  --margin-top-xs: 5px;
+  --margin-top-sm: 10px;
+  --margin-top-md: 15px;
+  --margin-top-lg: 20px;
+  --margin-top-xl: 25px;
+  --margin-top-2xl: 30px;
+  --margin-top-3xl: 35px;
+
+  --column-gap-sm: 10px;
+  --column-gap-xs: 5px;
+  --column-gap-md: 15px;
+  --column-gap-lg: 20px;
+  --column-gap-xl: 25px;
+  --column-gap-2xl: 30px;
+  --column-gap-2xl: 35px;
+
+  --row-gap-xs: 5px;
+  --row-gap-sm: 10px;
+  --row-gap-md: 15px;
+  --row-gap-lg: 20px;
+  --row-gap-xl: 25px;
+  --row-gap-2xl: 30px;
+  --row-gap-2xl: 35px;
+
+  --navbar-height: 70px;
 }
