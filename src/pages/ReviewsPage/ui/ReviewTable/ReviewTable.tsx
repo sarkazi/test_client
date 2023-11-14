@@ -92,6 +92,7 @@ const ReviewTable = memo((props: ReviewModalProps) => {
           onClick: () => handleClickRow(record)
         }
       }}
+      rowKey={(record: ReviewInterface) => record.id}
     />
   )
 })
